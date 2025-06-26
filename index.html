@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University NCC - Announcements</title>
+    <link rel="icon" href="images/logo1.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0a2e52;
+            --secondary-color: #c8102e;
+            --accent-color: #ffc72c;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --text-color: #333;
+            --text-light: #6c757d;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
+            --border-radius-sm: 6px;
+            --border-radius-md: 12px;
+            --border-radius-lg: 18px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f5f7fa;
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1001;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #0a1f38);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+            border-bottom: 4px solid var(--accent-color);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header Logo with Circular White Background */
+.header-logo-container {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: white;
+    padding: 5px;
+    border: 3px solid var(--accent-color); /* Using your accent color for border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-logo-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.header-logo-container img {
+    width: 80%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* For dual logos side by side */
+.logos {
+    display: flex;
+    gap: 20px; /* Space between logos */
+    align-items: center;
+}
+
+/* If you want different sizes */
+.ncc-logo {
+    width: 85px;
+    height: 85px;
+}
+
+.university-logo {
+    width: 80px;
+    height: 80px;
+}
+
+        .header-text h1 {
+            font-size: 2.4rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, white, #e6e6e6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: none;
+        }
+
+        .header-text p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: white;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 3rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: var(--secondary-color);
+            bottom: 0;
+            left: 0;
+            transition: var(--transition);
+            border-radius: 3px;
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-links a.active {
+            color: var(--secondary-color);
+        }
+
+        .nav-links a.active:after {
+            width: 100%;
+        }
+
+        /* Notice Marquee */
+        #notice-marquee {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 0;
+            font-weight: 500;
+            position: sticky;
+            top: 68px;
+            z-index: 999;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .marquee-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .marquee-container i {
+            font-size: 1.2rem;
+            min-width: 25px;
+        }
+
+        .marquee {
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .marquee span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 0 3rem;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 2.5rem;
+        }
+
+        /* Announcement Section */
+        .announcement-section {
+            background-color: white;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: 2.5rem;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid var(--accent-color);
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--secondary-color);
+        }
+
+        .announcement-card {
+            background-color: white;
+            border-left: 5px solid var(--secondary-color);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .announcement-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(200, 16, 46, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+            z-index: 0;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .announcement-card:hover:before {
+            opacity: 1;
+        }
+
+        .announcement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .announcement-title {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .announcement-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: block;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        .announcement-content {
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            color: var(--text-color);
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        .read-more {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            transition: var(--transition);
+            position: relative;
+            z-index: 1;
+            font-size: 0.95rem;
+        }
+
+        .read-more i {
+            margin-left: 8px;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .read-more:hover {
+            color: #a00d26;
+        }
+
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            position: sticky;
+            top: 120px;
+            align-self: flex-start;
+        }
+
+        /* Notice Board */
+        .notice-board {
+            background-color: white;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .notice-board:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+        }
+
+        .notice-title {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+        }
+
+        .notice-title i {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+
+        .notice-list {
+            list-style: none;
+        }
+
+        .notice-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .notice-item:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+            padding-left: 5px;
+        }
+
+        .notice-item:last-child {
+            border-bottom: none;
+        }
+
+        .notice-item i {
+            color: var(--secondary-color);
+            margin-right: 12px;
+            font-size: 0.8rem;
+            min-width: 16px;
+        }
+
+        .notice-item a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .notice-item a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Quick Links */
+        .quick-links {
+            background-color: white;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .links-title {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+        }
+
+        .links-title i {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .link-item {
+            background-color: var(--light-color);
+            padding: 1rem;
+            border-radius: var(--border-radius-sm);
+            transition: var(--transition);
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .link-item:hover {
+            background: linear-gradient(135deg, var(--primary-color), #0a1f38);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .link-item:hover a {
+            color: white;
+        }
+
+        .link-item a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+            display: block;
+        }
+
+        /* Social Media */
+        .social-media {
+            background-color: white;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .social-title {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-weight: 600;
+        }
+
+        .social-title i {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icon:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            top: -100%;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover:after {
+            top: 0;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .instagram {
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+        }
+
+        .twitter {
+            background: linear-gradient(45deg, #1DA1F2, #1991da);
+        }
+
+        .facebook {
+            background: linear-gradient(45deg, #3b5998, #2d4373);
+        }
+
+        .youtube {
+            background: linear-gradient(45deg, #FF0000, #cc0000);
+        }
+
+        /* Leadership Section */
+        #leadership {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            padding: 4rem 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .leadership-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .unit-card {
+            background: white;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .unit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .unit-header {
+            background: linear-gradient(135deg, var(--primary-color), #0a1f38);
+            color: white;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .unit-header h2 {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .unit-header p {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .unit-badge {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--secondary-color);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border: 3px solid white;
+        }
+
+        .officers-grid {
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .officer-profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .officer-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-color);
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .officer-profile:hover .officer-avatar {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-md);
+        }
+
+        .officer-details {
+            text-align: center;
+        }
+
+        .officer-rank {
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .officer-name {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+        }
+
+        .officer-position {
+            color: var(--text-light);
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary-color), #0a1f38);
+            color: white;
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+            position: relative;
+            border-top: 4px solid var(--accent-color);
+        }
+
+        footer:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-logo {
+            height: 70px;
+            margin-bottom: 1.5rem;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-about p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        .footer-links h3, .footer-contact h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .footer-links h3:after, .footer-contact h3:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+            bottom: 0;
+            left: 0;
+            border-radius: 3px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+            font-weight: 400;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(8px);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            gap: 12px;
+        }
+
+        .contact-item i {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            margin-top: 3px;
+        }
+
+        .contact-item span {
+            flex: 1;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            opacity: 0.15;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+            filter: blur(1px);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+            }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1200px) {
+            .header-content, .nav-container, .main-container, 
+            .leadership-container, .footer-container {
+                padding: 0 2rem;
+            }
+        }
+
+        /* Footer Logo with Circular Background */
+.footer-logo-container {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: white;
+    padding: 10px;
+    border: 3px solid var(--accent-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.footer-logo-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.footer-logo {
+    width: 85%;
+    height: auto;
+    object-fit: contain;
+    transform: translateY(23%);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* If you want to keep the original footer logo styles
+.footer-logo.original {
+    filter: brightness(0) invert(1);
+    height: 50px;
+    margin-bottom: 1.5rem;
+}
+
+For dark background footer
+footer .footer-logo-container {
+    border-color: white;
+    background: rgba(255, 255, 255, 0.9);
+} */
+
+        @media (max-width: 992px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-container {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 2rem;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                transition: var(--transition);
+                z-index: 1000;
+            }
+
+            .nav-container.active {
+                right: 0;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                margin-top: 2rem;
+            }
+
+            .nav-links li {
+                margin: 0;
+                width: 100%;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 0.8rem 0;
+                border-bottom: 1px solid rgba(0,0,0,0.05);
+            }
+
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+                grid-row: 1;
+            }
+
+            .leadership-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+
+            
+
+            .header-text {
+                text-align: center;
+            }
+
+            #notice-marquee {
+                top: 0;
+                position: relative;
+            }
+
+            .marquee-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .officers-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header-content, .nav-container, .main-container, 
+            .leadership-container, .footer-container {
+                padding: 0 1.5rem;
+            }
+
+            .header-text h1 {
+                font-size: 2rem;
+            }
+
+            
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .announcement-card {
+                padding: 1.5rem;
+            }
+
+            .officer-avatar {
+                width: 70px;
+                height: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Header Section -->
+    <section id="home">
+    <header>
+        <div class="floating-elements">
+            <div class="floating-element" style="width: 100px; height: 100px; top: 20%; left: 10%; animation-delay: 0s;"></div>
+            <div class="floating-element" style="width: 150px; height: 150px; top: 60%; left: 70%; animation-delay: 2s; animation-duration: 20s;"></div>
+            <div class="floating-element" style="width: 80px; height: 80px; top: 80%; left: 30%; animation-delay: 4s; animation-duration: 18s;"></div>
+        </div>
+        <div class="header-content">
+            <div class="logos">
+    <div class="header-logo-container ncc-logo">
+        <img src="ncc-logo-png_seeklogo-440419.png" alt="NCC Logo">
+    </div>
+    <div class="header-logo-container university-logo">
+        <img src="Assam_University_Logo.png" alt=" Assam University Logo">
+    </div>
+</div>
+            <div class="header-text">
+                <h1>ASSAM UNIVERSITY NCC UNIT</h1>
+                <p>Discipline | Unity | Leadership</p>
+            </div>
+        </div>
+    </header>
+    </section>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container" id="navContainer">
+            <div class="nav-brand">
+                <span style="font-weight: 600; color: var(--primary-color);">ANNOUNCEMENTS</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about-contact">About NCC</a></li>
+                <!-- <li><a href="#">Events</a></li>
+                <li><a href="#">Gallery</a></li> -->
+                <li><a href="#about-contact">Contact</a></li>
+            </ul>
+        </div>
+         <!-- Notice Marquee -->
+    <section id="notice-marquee">
+        <div class="marquee-container">
+            <i class="fas fa-bullhorn"></i>
+            <div class="marquee">
+                <span>
+                    • NCC Poster Designer Recruitment | Social Media & Event Graphics • 
+                </span>
+            </div>
+        </div>
+    </section>
+    </nav>
+
+   
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <main class="announcement-section">
+            <h2 class="section-title">Latest Announcements</h2>
+            
+            <div class="announcement-card">
+                <h3 class="announcement-title">Poster & Graphic Designer Recruitmentnt</h3>
+                <span class="announcement-date">Posted on: June 26, 2025</span>
+                <div class="announcement-content">
+                    <p>NCC Assam University Silchar Unit is inviting passionate and creative cadets to take up the role of official graphic designer! Use your design and presentation skills to contribute to NCC events, social media, and more. Click on "Read More" to explore the full opportunity. Last Date to Apply: 5th July 2025</p>
+                </div>
+                <a href="notice1.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="announcement-card" style="animation-delay: 0.1s;">
+                <h3 class="announcement-title">Inter Group Flag Area Competition – JNV Rayang (12–21 July 2025)</h3>
+                <span class="announcement-date">Posted on: June 26, 2025</span>
+                <div class="announcement-content">
+                    <p>Vacancies have been freshly distributed for the Inter Group Flag Area Competition to be held at JNV Rayang Military Station from 12th to 21st July 2025. Cadets from 3 Assam, 62 Assam (G), and 4 Assam units are eligible to apply for selection. Cadets are invited to apply for selection in the Inter Group Competition team. Multiple vacancies are open for SD, SW, JD, and JW categories across the participating battalions. All interested cadets must be prepared for selection, training, and travel.</p>
+                </div>
+                <a href="notice2.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <!-- <div class="announcement-card" style="animation-delay: 0.2s;">
+                <h3 class="announcement-title">NCC Certificate Distribution</h3>
+                <span class="announcement-date">Posted on: October 5, 2023</span>
+                <div class="announcement-content">
+                    <p>The NCC certificate distribution ceremony for the 2022-23 batch will be held on October 25, 2023 at the University Auditorium at 3 PM. All eligible cadets must attend in proper uniform. Parents are cordially invited.</p>
+                </div>
+                <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div> -->
+            
+        </main>
+
+        <aside class="sidebar">
+            <div class="notice-board">
+                <h3 class="notice-title"><i class="fas fa-bullhorn"></i> Notice Board</h3>
+                <ul class="notice-list">
+                    <li class="notice-item">
+                        <i class="fas fa-chevron-right"></i>
+                        <a href="notice1.html">Poster & Graphic Designer Recruitmentnt</a>
+                    </li>
+                    <li class="notice-item">
+                        <i class="fas fa-chevron-right"></i>
+                        <a href="notice2.html">Flag Area Competition</a>
+                    </li>
+                    <!-- <li class="notice-item">
+                        <i class="fas fa-chevron-right"></i>
+                        <a href="#">NCC scholarship application form</a>
+                    </li>
+                    <li class="notice-item">
+                        <i class="fas fa-chevron-right"></i>
+                        <a href="#">Uniform maintenance instructions</a>
+                    </li>
+                    <li class="notice-item">
+                        <i class="fas fa-chevron-right"></i>
+                        <a href="#">Important contact numbers</a>
+                    </li> -->
+                </ul>
+            </div>
+
+            <div class="quick-links">
+                <h3 class="links-title"><i class="fas fa-link"></i> Quick Links</h3>
+                <div class="links-grid">
+                    <div class="link-item">
+                        <a href="https://indiancc.mygov.in" target="_blank">NCC Official Website</a>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://nis.bisag-n.gov.in/nis/login" target="_blank">NCC Enrollment Website</a>
+                    </div>
+                    <!-- <div class="link-item">
+                        <a href="#">Cadet Handbook</a>
+                    </div>
+                    <div class="link-item">
+                        <a href="#">Event Calendar</a>
+                    </div>
+                    <div class="link-item">
+                        <a href="#">Achievements</a>
+                    </div>
+                    <div class="link-item">
+                        <a href="#">FAQ</a>
+                    </div> -->
+                </div>
+            </div>
+
+            <div class="social-media">
+                <h3 class="social-title"><i class="fas fa-share-alt"></i> Follow Us</h3>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/ncc_aus.official/profilecard/?igsh=MXdhZ2QzbHBscXly" class="social-icon instagram" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://x.com/ncc_aus_in?t=GXalAM-kpkAni1Zibc2L5A&s=08" class="social-icon twitter" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.facebook.com/share/1Aeo2KmDuF/" class="social-icon facebook" target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Leadership Section -->
+    <section id="leadership">
+        <div class="leadership-container">
+            <h2 class="section-title">Our Leadership</h2>
+            <div class="leadership-grid">
+                <!-- Battalion 1 -->
+                <div class="unit-card">
+                    <div class="unit-header">
+                        
+                        <h2>3 ASSAM BN NCC</h2>
+                        <h2>ASSAM UNIVERSITY SILCHAR UNIT</h2>
+                        <p>Silchar Group</p>
+                    </div>
+                    <div class="officers-grid">
+                        <div class="officer-profile">
+                            <img src="./Photos/Sanjay.png" alt="CTO. Sanjay Sinha" class="officer-avatar">
+                            <div class="officer-details">
+                                <div class="officer-rank">CTO</div>
+                                <div class="officer-name">Sanjay Sinha</div>
+                                <div class="officer-position">Care Taker Officer</div>
+                            </div>
+                        </div>
+                        <div class="officer-profile">
+                            <img src="./Photos/Prince.jpg" alt="SUO Prince Kumar Kuswaha" class="officer-avatar">
+                            <div class="officer-details">
+                                <div class="officer-rank">SUO</div>
+                                <div class="officer-name">Prince Kumar Kuswaha</div>
+                                <div class="officer-position">Senior Under Officer</div>
+                            </div>
+                        </div>
+                        <div class="officer-profile">
+                            <img src="./Photos/Abhishek.png" alt="UO Abhishek Nath" class="officer-avatar">
+                            <div class="officer-details">
+                                <div class="officer-rank">UO</div>
+                                <div class="officer-name">Abhishek Nath</div>
+                                <div class="officer-position">Under Officer</div>
+                            </div>
+                        </div>
+                        <div class="officer-profile">
+                            <img src="./Photos/Raza.png" alt="UO Raza Alam" class="officer-avatar">
+                            <div class="officer-details">
+                                <div class="officer-rank">UO</div>
+                                <div class="officer-name">Raza Alam</div>
+                                <div class="officer-position">Under Officer</div>
+                            </div>
+                        </div>
+                        <div class="officer-profile">
+                            <img src="./Photos/Harsha.jpg" alt="CQMS Harsha Das" class="officer-avatar">
+                            <div class="officer-details">
+                                <div class="officer-rank">CQMS</div>
+                                <div class="officer-name">Harsha Das</div>
+                                <div class="officer-position">Quartermaster</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <!-- Battalion 2 -->
+                <div class="unit-card">
+                    <div class="unit-header">
+                        
+                        <h2>62 ASSAM GIRLS BN NCC</h2>
+                        <h2>ASSAM UNIVERSITY SILCHAR UNIT</h2>
+                        <p>Silchar Group</p>
+                    </div>
+                    <div class="officers-grid">
+                        <div class="officer-profile">
+                            <img src="./Photos/Joyashri.png" alt="CTO. Joyashri Dey" class="officer-avatar">
+                            <div class="officer-details">
+                                <div class="officer-rank">CTO</div>
+                                <div class="officer-name">Joyashri Dey</div>
+                                <div class="officer-position">Care Taker Officer</div>
+                            </div>
+                        </div>
+                        <div class="officer-profile">
+                            <img src="./Photos/Sanchita.png" alt="LCPL Sanchita Paul" class="officer-avatar">
+                            <div class="officer-details">
+                                <div class="officer-rank">LCPL</div>
+                                <div class="officer-name">Sanchita Paul</div>
+                                <div class="officer-position">Lance Corporal</div>
+                            </div>
+                        </div>
+                        <div class="officer-profile">
+                            <img src="./Photos/Snaha.png" alt="LCPL Snaha Nath" class="officer-avatar">
+                            <div class="officer-details">
+                                <div class="officer-rank">LCPL</div>
+                                <div class="officer-name">Snaha Nath</div>
+                                <div class="officer-position">Lance Corporal</div>
+                            </div>
+                        </div>
+                        
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <section id="about-contact">
+    <footer>
+        <div class="footer-container">
+            
+            <div class="footer-about">
+            <div class="footer-logo-container">
+            <img src="ncc-logo-png_seeklogo-440419.png" alt="NCC Logo" class="footer-logo">
+            
+            </div>
+            <p>The National Cadet Corps is the youth wing of the Indian Armed Forces with its headquarters in New Delhi, India. It is open to school and college students on voluntary basis.</p>
+            <p>The Assam University Silchar NCC Unit has been consistently producing outstanding cadets who have excelled in various fields.</p>
+            </div>
+            
+            
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about-contact">About NCC</a></li>
+                    <!-- <li><a href="#">Enrollment</a></li>
+                    <li><a href="#">Training</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Gallery</a></li> -->
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>NCC Office, Assam University Silchar</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>+91 9864695814</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>nccausofficial@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Office Hours: 2:20 PM - 5 PM (Mon-Sat)</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 University NCC Unit. All Rights Reserved.
+        </div>
+    </footer>
+    </section>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navContainer = document.getElementById('navContainer');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navContainer.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navContainer.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navContainer.contains(e.target) && e.target !== mobileMenuBtn) {
+                navContainer.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+
+        // Marquee animation for notices
+        const marquee = document.querySelector('.marquee span');
+        marquee.innerHTML += marquee.innerHTML;
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (navContainer.classList.contains('active')) {
+                        navContainer.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
